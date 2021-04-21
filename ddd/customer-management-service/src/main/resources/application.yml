@@ -1,0 +1,13 @@
+
+server:
+  port: 8081
+
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3308/ddd_customer
+    username: ddd_customer
+    password: ddd_customer
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+

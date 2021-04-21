@@ -10,3 +10,12 @@
 rootProject.name = "spandigital-ddd"
 
 include "bbom"
+
+include ":customer-management-service"
+project(":customer-management-service").projectDir = new File("./ddd/customer-management-service")
+
+include ":freelancer-management-service"
+project(":freelancer-management-service").projectDir = new File("./ddd/freelancer-management-service")
+
+include ":project-management-service"
+project(":project-management-service").projectDir = new File("./ddd/project-management-service")

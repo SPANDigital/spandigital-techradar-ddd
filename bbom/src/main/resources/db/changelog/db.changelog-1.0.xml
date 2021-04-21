@@ -1,0 +1,498 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet author="Kevin Sewell" id="1618917576534-1">
+        <createTable tableName="contact_information">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="value" type="VARCHAR(255)"/>
+            <column name="created_by_id" type="BIGINT"/>
+            <column name="contact_type_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-2">
+        <createTable tableName="contact_type">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="is_email" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_fax" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_mobile" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by_id" type="BIGINT"/>
+        </createTable>
+        <insert tableName="contact_type">
+            <column name="id" valueBoolean="true"/>
+            <column name="name" value="Email"/>
+            <column name="is_email" valueBoolean="true"/>
+            <column name="is_fax" valueBoolean="false"/>
+            <column name="is_mobile" valueBoolean="false"/>
+        </insert>
+        <insert tableName="contact_type">
+            <column name="id" value="2"/>
+            <column name="name" value="Fax"/>
+            <column name="is_email" valueBoolean="false"/>
+            <column name="is_fax" valueBoolean="true"/>
+            <column name="is_mobile" valueBoolean="false" />
+        </insert>
+        <insert tableName="contact_type">
+            <column name="id" value="3"/>
+            <column name="name" value="Mobile"/>
+            <column name="is_email" valueBoolean="false"/>
+            <column name="is_fax" valueBoolean="false"/>
+            <column name="is_mobile" valueBoolean="true"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-3">
+        <createTable tableName="customer">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="created_by_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-4">
+        <createTable tableName="freelancer">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="city" type="VARCHAR(255)"/>
+            <column name="street_name1" type="VARCHAR(255)"/>
+            <column name="street_name2" type="VARCHAR(255)"/>
+            <column name="zip_code" type="VARCHAR(255)"/>
+            <column name="created_by_id" type="BIGINT"/>
+            <column name="contact_information_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-5">
+        <createTable tableName="hibernate_sequence">
+            <column name="next_val" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-6">
+        <createTable tableName="project">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="created_by_id" type="BIGINT"/>
+            <column name="customer_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-7">
+        <createTable tableName="project_freelancers">
+            <column name="project_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="freelancer_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-8">
+        <createTable tableName="role">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="created_by_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-9">
+        <createTable tableName="timesheet">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="hours_worked" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="month" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="year" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by_id" type="BIGINT"/>
+            <column name="freelancer_id" type="BIGINT"/>
+            <column name="project_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-10">
+        <createTable tableName="user">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="encrypted_password" type="VARCHAR(255)"/>
+            <column name="username" type="VARCHAR(255)"/>
+            <column name="created_by_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-11">
+        <createTable tableName="user_roles">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-12">
+        <createIndex indexName="FK4g14pfa2ikswp9yixd3hhylj" tableName="contact_type">
+            <column name="created_by_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-13">
+        <createIndex indexName="FK55itppkw3i07do3h7qoclqd4k" tableName="user_roles">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-14">
+        <createIndex indexName="FK8cadixeaqdma8nqr7sao1qy9a" tableName="project">
+            <column name="created_by_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-15">
+        <createIndex indexName="FK9o7r2qptrh93devpob11veidj" tableName="user">
+            <column name="created_by_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-16">
+        <createIndex indexName="FK9yy9knsod5i2yxomqfc8viu8v" tableName="freelancer">
+            <column name="contact_information_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-17">
+        <createIndex indexName="FKfejwcdhx2pom7046xttab1hp5" tableName="contact_information">
+            <column name="contact_type_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-18">
+        <createIndex indexName="FKfmocxty38orasrnu2pb5ohyly" tableName="project_freelancers">
+            <column name="freelancer_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-19">
+        <createIndex indexName="FKh6eagcjylb9txyjk4wnm5dkem" tableName="timesheet">
+            <column name="project_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-20">
+        <createIndex indexName="FKj82sq004vnbb18nq89pu50arv" tableName="freelancer">
+            <column name="created_by_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-21">
+        <createIndex indexName="FKj948tru2ilgqxfxsppp9mom5j" tableName="project">
+            <column name="customer_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-22">
+        <createIndex indexName="FKkqlkhhpl8rwp0mt1yvhqaw8ds" tableName="project_freelancers">
+            <column name="project_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-23">
+        <createIndex indexName="FKm9jafbkd2m7x4ms2iq3b9hfg3" tableName="role">
+            <column name="created_by_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-24">
+        <createIndex indexName="FKnx2nr2t3lroyxg8axdse6f79t" tableName="customer">
+            <column name="created_by_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-25">
+        <createIndex indexName="FKp0yp315u1ta1spar0kw4d91v7" tableName="timesheet">
+            <column name="created_by_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-26">
+        <createIndex indexName="FKr9xe59150dex4dn9kwlyprqck" tableName="timesheet">
+            <column name="freelancer_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-27">
+        <createIndex indexName="FKrhfovtciq1l558cw6udg0h0d3" tableName="user_roles">
+            <column name="role_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-28">
+        <createIndex indexName="FKsis7t5q8a3jtqfu67x6mjoc5j" tableName="contact_information">
+            <column name="created_by_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-29">
+        <addForeignKeyConstraint
+                baseColumnNames="created_by_id"
+                baseTableName="contact_type"
+                constraintName="FK4g14pfa2ikswp9yixd3hhylj"
+                deferrable="false"
+                initiallyDeferred="false"
+                onDelete="RESTRICT"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="user"
+                validate="true"/>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-30">
+        <addForeignKeyConstraint
+                baseColumnNames="user_id"
+                baseTableName="user_roles"
+                constraintName="FK55itppkw3i07do3h7qoclqd4k"
+                deferrable="false"
+                initiallyDeferred="false"
+                onDelete="RESTRICT"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="user"
+                validate="true"/>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-31">
+        <addForeignKeyConstraint
+                baseColumnNames="created_by_id"
+                baseTableName="project"
+                constraintName="FK8cadixeaqdma8nqr7sao1qy9a"
+                deferrable="false"
+                initiallyDeferred="false"
+                onDelete="RESTRICT"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="user"
+                validate="true"/>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-32">
+        <addForeignKeyConstraint
+                baseColumnNames="created_by_id"
+                baseTableName="user"
+                constraintName="FK9o7r2qptrh93devpob11veidj"
+                deferrable="false"
+                initiallyDeferred="false"
+                onDelete="RESTRICT"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="user"
+                validate="true"/>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-33">
+        <addForeignKeyConstraint
+                baseColumnNames="contact_information_id"
+                baseTableName="freelancer"
+                constraintName="FK9yy9knsod5i2yxomqfc8viu8v"
+                deferrable="false"
+                initiallyDeferred="false"
+                onDelete="RESTRICT"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="contact_information"
+                validate="true"/>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-34">
+        <addForeignKeyConstraint
+                baseColumnNames="contact_type_id"
+                baseTableName="contact_information"
+                constraintName="FKfejwcdhx2pom7046xttab1hp5"
+                deferrable="false"
+                initiallyDeferred="false"
+                onDelete="RESTRICT"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="contact_type"
+                validate="true"/>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-35">
+        <addForeignKeyConstraint
+                baseColumnNames="freelancer_id"
+                baseTableName="project_freelancers"
+                constraintName="FKfmocxty38orasrnu2pb5ohyly"
+                deferrable="false"
+                initiallyDeferred="false"
+                onDelete="RESTRICT"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="freelancer"
+                validate="true"/>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-36">
+        <addForeignKeyConstraint
+                baseColumnNames="project_id"
+                baseTableName="timesheet"
+                constraintName="FKh6eagcjylb9txyjk4wnm5dkem"
+                deferrable="false"
+                initiallyDeferred="false"
+                onDelete="RESTRICT"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="project"
+                validate="true"/>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-37">
+        <addForeignKeyConstraint
+                baseColumnNames="created_by_id"
+                baseTableName="freelancer"
+                constraintName="FKj82sq004vnbb18nq89pu50arv"
+                deferrable="false"
+                initiallyDeferred="false"
+                onDelete="RESTRICT" onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="user"
+                validate="true"/>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-38">
+        <addForeignKeyConstraint
+                baseColumnNames="customer_id"
+                baseTableName="project"
+                constraintName="FKj948tru2ilgqxfxsppp9mom5j"
+                deferrable="false"
+                initiallyDeferred="false"
+                onDelete="RESTRICT"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="customer"
+                validate="true"/>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-39">
+        <addForeignKeyConstraint
+                baseColumnNames="project_id"
+                baseTableName="project_freelancers"
+                constraintName="FKkqlkhhpl8rwp0mt1yvhqaw8ds"
+                deferrable="false"
+                initiallyDeferred="false"
+                onDelete="RESTRICT"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="project"
+                validate="true"/>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-40">
+        <addForeignKeyConstraint
+                baseColumnNames="created_by_id"
+                baseTableName="role"
+                constraintName="FKm9jafbkd2m7x4ms2iq3b9hfg3"
+                deferrable="false"
+                initiallyDeferred="false"
+                onDelete="RESTRICT"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="user"
+                validate="true"/>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-41">
+        <addForeignKeyConstraint
+                baseColumnNames="created_by_id"
+                baseTableName="customer"
+                constraintName="FKnx2nr2t3lroyxg8axdse6f79t"
+                deferrable="false"
+                initiallyDeferred="false"
+                onDelete="RESTRICT"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="user"
+                validate="true"/>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-42">
+        <addForeignKeyConstraint
+                baseColumnNames="created_by_id"
+                baseTableName="timesheet"
+                constraintName="FKp0yp315u1ta1spar0kw4d91v7"
+                deferrable="false"
+                initiallyDeferred="false"
+                onDelete="RESTRICT"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="user"
+                validate="true"/>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-43">
+        <addForeignKeyConstraint
+                baseColumnNames="freelancer_id"
+                baseTableName="timesheet"
+                constraintName="FKr9xe59150dex4dn9kwlyprqck"
+                deferrable="false"
+                initiallyDeferred="false"
+                onDelete="RESTRICT"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="freelancer"
+                validate="true"/>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-44">
+        <addForeignKeyConstraint
+                baseColumnNames="role_id"
+                baseTableName="user_roles"
+                constraintName="FKrhfovtciq1l558cw6udg0h0d3"
+                deferrable="false"
+                initiallyDeferred="false"
+                onDelete="RESTRICT"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="role"
+                validate="true"/>
+    </changeSet>
+
+    <changeSet author="Kevin Sewell" id="1618917576534-45">
+        <addForeignKeyConstraint
+                baseColumnNames="created_by_id"
+                baseTableName="contact_information"
+                constraintName="FKsis7t5q8a3jtqfu67x6mjoc5j"
+                deferrable="false"
+                initiallyDeferred="false"
+                onDelete="RESTRICT"
+                onUpdate="RESTRICT"
+                referencedColumnNames="id"
+                referencedTableName="user"
+                validate="true"/>
+    </changeSet>
+</databaseChangeLog>

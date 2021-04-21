@@ -1,0 +1,44 @@
+version: '2'
+
+volumes:
+  bbom_data:
+    driver: local
+  ddd_customer_data:
+    driver: local
+  ddd_project_data:
+    driver: local
+
+services:
+  bbom_mysql:
+    image: mysql
+    ports:
+      - 3307:3306
+    volumes:
+      - bbom_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: bbom
+      MYSQL_USER: bbom
+      MYSQL_PASSWORD: bbom
+  ddd_customer:
+    image: mysql
+    ports:
+      - 3308:3306
+    volumes:
+      - ddd_customer_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: ddd_customer
+      MYSQL_USER: ddd_customer
+      MYSQL_PASSWORD: ddd_customer
+  ddd_project_mysql:
+    image: mysql
+    ports:
+      - 3309:3306
+    volumes:
+      - ddd_project_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: ddd_project
+      MYSQL_USER: ddd_project
+      MYSQL_PASSWORD: ddd_project

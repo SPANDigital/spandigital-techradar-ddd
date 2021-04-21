@@ -4,8 +4,6 @@ plugins {
     id "java"
 }
 
-group = "com.spandigital.ddd"
-version = "0.0.1-SNAPSHOT"
 sourceCompatibility = "11"
 
 configurations {
@@ -19,14 +17,11 @@ repositories {
 }
 
 dependencies {
-    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
     implementation "org.springframework.boot:spring-boot-starter-web"
-    implementation "org.liquibase:liquibase-core:4.3.1"
+    implementation "org.springframework.data:spring-data-commons"
 
     annotationProcessor "org.projectlombok:lombok"
     compileOnly "org.projectlombok:lombok"
-
-    runtimeOnly "mysql:mysql-connector-java"
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
 }
